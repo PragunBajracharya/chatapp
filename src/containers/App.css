@@ -27,3 +27,38 @@ button:hover {
 .text--center {
     text-align: center;
 }
+
+.app__form {
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    background-color: #e9e9eb;
+    width: 100%;
+}
+
+.app__formControl {
+    display: flex !important;
+    flex-direction: row !important;
+    border-radius: 18px;
+    background-color: #fff;
+    padding: 0 15px 10px !important;
+}
+
+.app__input {
+    flex: 1;
+}
+
+.app__iconButton {
+    flex: 0;
+}
+
+.app__messageBoxWrapper {
+    overflow: hidden;
+    padding-bottom: 90px;
+}
+
+.app__messageBox {
+    height: 100%;
+    overflow-y: auto;
+}
