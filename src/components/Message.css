@@ -1,5 +1,4 @@
 .message {
-    padding: 10px;
     margin: 10px;
     width: fit-content;
 }
@@ -28,4 +27,10 @@
 
 .message__wrapper {
     padding: 10px !important;
+}
+
+.app__messageBox> div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
 }

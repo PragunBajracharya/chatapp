@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FormControl, Input} from "@material-ui/core";
 import firebase from 'firebase';
+import $ from "jquery";
 import FlipMove from 'react-flip-move';
 import {IconButton} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
@@ -27,6 +28,15 @@ function Messages() {
         setUsername(prompt("Please enter your name"));
     }, []);
 
+    useEffect(() => {
+        $(document).ready(() => {
+            let windowHeight = $( window ).innerHeight();
+            let messageField = $('.app__form').outerHeight();
+            console.log(messageField, windowHeight);
+            $('.app__messageBoxWrapper').height(windowHeight - messageField - 75);
+        });
+    }, []);
+
     const sendMessage = (event) => {
         event.preventDefault();
         db.collection('messages').add({
@@ -35,13 +45,17 @@ function Messages() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         setInput('');
+        window.scroll({
+            top: $('.app__messageBox').scrollHeight,
+            behavior: 'smooth'
+        });
     };
 
     return (
         <div className="App">
             <h2>Welcome {username}</h2>
-            <div class="app__messageBoxWrapper">
-                <div class="app__messageBox">
+            <div className="app__messageBoxWrapper">
+                <div className="app__messageBox">
                     <FlipMove>
                         {
                             messages.map(({id, message}) => (

@@ -12,7 +12,7 @@ function App() {
         <Router>
             <Switch>
                 <Route path="/" exact component={Login}/>
-                <Route path="/messages" exact component={Messages}/>
+                <Route path="/messages" exact component={withAuthentication(Messages)}/>
                 <Route path="/dashboard" component={withAuthentication(Dashboard)}/>
             </Switch>
         </Router>
