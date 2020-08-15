@@ -32,7 +32,6 @@ function Messages() {
         $(document).ready(() => {
             let windowHeight = $( window ).innerHeight();
             let messageField = $('.app__form').outerHeight();
-            console.log(messageField, windowHeight);
             $('.app__messageBoxWrapper').height(windowHeight - messageField - 75);
         });
     }, []);
@@ -45,10 +44,8 @@ function Messages() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         setInput('');
-        window.scroll({
-            top: $('.app__messageBox').scrollHeight,
-            behavior: 'smooth'
-        });
+        let h = $('.app__messageBox')[0].scrollHeight;
+        $('.app__messageBox').scrollTop(h);
     };
 
     return (
