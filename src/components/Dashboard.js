@@ -7,6 +7,8 @@ import SocialProfileList from './SocialProfileList';
 import {auth} from '../firebase';
 
 import './Dashboard.css';
+import {setCurrentUser} from "../redux/user/user-action";
+import {connect} from "react-redux";
 
 class Dashboard extends Component {
     static propTypes = {
@@ -100,7 +102,10 @@ class Dashboard extends Component {
                 />
                 <button
                     className="btn__logout"
-                    onClick={() => auth.getAuth().signOut()}
+                    onClick={() => {
+                        auth.getAuth().signOut();
+                        this.props.setCurrentUser(null);
+                    }}
                 >
                     Logout
                 </button>
@@ -109,4 +114,8 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(Dashboard);
