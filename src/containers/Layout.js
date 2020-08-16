@@ -16,7 +16,8 @@ const Layout = ({children, contentCenter}) => {
     return (
         <section>
             <header>
-                <h1>OAuth Authentication with Firebase</h1>
+                <h1>Simple Chat App using React and Firebase</h1>
+                <h2>Created By- <a href="https://pragunbaj.com" target="_blank" rel="noopener noreferrer">Pragun Bajracharya</a></h2>
             </header>
             <main className={contentCenter ? 'content-center' : ''}>{children}</main>
             <footer>

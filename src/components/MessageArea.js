@@ -5,32 +5,33 @@ import $ from "jquery";
 import FlipMove from 'react-flip-move';
 import {IconButton} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
+import {connect} from 'react-redux';
 
 import Message from "./Message";
 import '../containers/App.css';
 
 import {db} from "../firebase/db";
 
-function Messages() {
+const Messages = ({currentUser}) => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([]);
     const [username, setUsername] = useState('');
 
     useEffect(() => {
         db.collection('messages')
-            .orderBy('timestamp', 'desc')
+            .orderBy('timestamp', 'asc')
             .onSnapshot(snapshot => {
                 setMessages(snapshot.docs.map(doc => ({id: doc.id, message: doc.data()})));
             });
     }, []);
 
     useEffect(() => {
-        setUsername(prompt("Please enter your name"));
-    }, []);
+        setUsername(currentUser.userName);
+    },[currentUser.userName]);
 
     useEffect(() => {
         $(document).ready(() => {
-            let windowHeight = $( window ).innerHeight();
+            let windowHeight = $(window).innerHeight();
             let messageField = $('.app__form').outerHeight();
             $('.app__messageBoxWrapper').height(windowHeight - messageField - 75);
         });
@@ -41,6 +42,7 @@ function Messages() {
         db.collection('messages').add({
             message: input,
             username: username,
+            senderId: currentUser.userId,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         setInput('');
@@ -77,4 +79,8 @@ function Messages() {
     );
 }
 
-export default Messages;
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Messages);
