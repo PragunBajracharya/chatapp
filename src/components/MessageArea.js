@@ -58,7 +58,7 @@ const Messages = ({currentUser}) => {
                     <FlipMove>
                         {
                             messages.map(({id, message}) => (
-                                <Message key={id} message={message} username={username}/>
+                                <Message key={id} message={message} senderId={currentUser.userId}/>
                             ))
                         }
                     </FlipMove>
