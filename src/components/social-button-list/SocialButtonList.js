@@ -19,7 +19,7 @@ const propTypes = {
             provider: PropTypes.func.isRequired
         })
     }).isRequired,
-    auth: PropTypes.func.isRequired,
+    auth: PropTypes.func,
     currentProviders: PropTypes.func
 };
 
@@ -31,7 +31,7 @@ const SocialButtonList = ({history, buttonList, auth, currentProviders}) => {
     const authHandler = authData => {
         if (authData) {
             if (currentProviders === null) {
-                history.push('/dashboard');
+                history.push('/messages');
             } else {
                 currentProviders(authData.user.providerData);
             }

@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Layout from '../containers/Layout';
-import SocialButtonList from './SocialButtonList';
-import SocialProfileList from './SocialProfileList';
-import {auth} from '../firebase';
+import SocialButtonList from '../social-button-list/SocialButtonList';
+import SocialProfileList from '../social-profile-list/SocialProfileList';
+import {auth} from '../../firebase/firebase';
 
-import './Dashboard.css';
-import {setCurrentUser} from "../redux/user/user-action";
+import './Profile.css';
+import {setCurrentUser} from "../../redux/user/user-action";
 import {connect} from "react-redux";
 
 class Dashboard extends Component {
@@ -85,8 +84,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <Layout>
-                <h1>Secure Area</h1>
+            <div>
                 <SocialProfileList
                     auth={auth.getAuth}
                     providerData={this.state.providerData}
@@ -103,13 +101,13 @@ class Dashboard extends Component {
                 <button
                     className="btn__logout"
                     onClick={() => {
-                        auth.getAuth().signOut();
+                        auth.signOut();
                         this.props.setCurrentUser(null);
                     }}
                 >
                     Logout
                 </button>
-            </Layout>
+            </div>
         );
     }
 }

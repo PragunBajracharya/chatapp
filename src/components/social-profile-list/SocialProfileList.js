@@ -5,7 +5,7 @@ import './SocialProfileList.css';
 
 class SocialProfileList extends PureComponent {
     static propTypes = {
-        auth: PropTypes.func.isRequired,
+        auth: PropTypes.func,
         providerData: PropTypes.arrayOf(PropTypes.object).isRequired,
         unlinkedProvider: PropTypes.func.isRequired
     };
