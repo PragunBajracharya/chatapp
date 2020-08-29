@@ -34,7 +34,7 @@
 
 .chat__body{
     flex: 1;
-    padding: 30px 15px;
+    padding-left: 15px;
     overflow: auto;
     background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png") no-repeat center/cover;
 }
@@ -51,6 +51,7 @@
 
 .chat__receiver{
     margin-left: auto;
+    margin-right: 15px;
     background-color: #dcf8c6;
 }
 
@@ -94,4 +95,31 @@
 .chat__footer > .MuiSvgIcon-root{
     margin-left: 10px;
     color: gray;
+}
+
+.css-y1c0xs{
+    padding-top: 25px;
+}
+
+button.css-1qyrjaz{
+    margin: 0 auto;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    right: 35px;
+    bottom: 35px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+button.css-1qyrjaz:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
 }

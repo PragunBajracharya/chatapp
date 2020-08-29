@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Avatar, IconButton} from "@material-ui/core";
 import firebase from "firebase";
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 import "./Chat.css";
 import SearchIcon from '@material-ui/icons/Search';
@@ -29,7 +30,7 @@ function Chat({currentUser}) {
                 setRoomName(snapshot.data().name)
             );
             db.collection('rooms').doc(roomId)
-                .collection('messages').orderBy('timestamp', 'desc')
+                .collection('messages').orderBy('timestamp', 'asc')
                 .onSnapshot(snapshot => (
                     setMessages(snapshot.docs.map(doc =>
                         doc.data()
@@ -67,19 +68,20 @@ function Chat({currentUser}) {
                     </IconButton>
                 </div>
             </div>
-            <div className="chat__body">
+            <ScrollToBottom className="chat__body">
                 {messages.map((message, index) => (
-                    <p key={index} className={`chat__message ${message.senderId === currentUser.uid ? "chat__receiver" : ''}`}>
-                    <span className="chat__name">
-                        {message.name}
-                    </span>
+                    <p key={index}
+                       className={`chat__message ${message.senderId === currentUser.uid ? "chat__receiver" : ''}`}>
+                            <span className="chat__name">
+                                {message.name}
+                            </span>
                         {message.message}
                         <span className="chat__timestamp">
                             {new Date(message.timestamp?.toDate()).toUTCString()}
                         </span>
                     </p>
                 ))}
-            </div>
+            </ScrollToBottom>
             <div className="chat__footer">
                 <InsertEmoticonIcon/>
                 <form>
