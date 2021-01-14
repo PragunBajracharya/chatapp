@@ -4,8 +4,9 @@ import {Link} from "react-router-dom";
 
 import "./SidebarChat.css";
 import db from "../../../firebase/firebase";
+import {connect} from "react-redux";
 
-function SidebarChat({id, name, addNewChat}) {
+function SidebarChat({id, name, addNewChat, currentUser}) {
     const [seed, setSeed] = useState("");
     const [messages, setMessages] = useState("");
 
@@ -51,4 +52,8 @@ function SidebarChat({id, name, addNewChat}) {
     );
 }
 
-export default SidebarChat;
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(SidebarChat);
